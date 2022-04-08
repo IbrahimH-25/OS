@@ -1,0 +1,64 @@
+'''
+Ibrahim Hussaini
+gw8885
+A tkinter app that lets the user chose a countries currency 
+'''
+
+from tkinter import *
+
+class convApp:
+
+    #variables
+    currencies = ["Egyptian - Pound","Europe - Euro","South Korean - Won","Russian - Ruble","India – Rupee"]
+    rates = [0.054,1.09,0.00082,0.012,0.013]
+
+    def __init__(self):
+        self.root = Tk()
+        self.frame = Frame(self.root)
+        self.frame.pack()
+        self.pickFrame()
+        self.dropDownWidget()
+        self.pickerTranslate()
+        self.displayFrame()
+        self.display()
+        self.displayButton()
+    
+
+    def pickFrame(self):
+        self.pickF = Frame(self.frame)
+        self.pickF.pack(side='left')
+    
+
+    def dropDownWidget(self):
+        #Lable for widget
+        self.pickerWidget = Label(self.pickF,text="Currencies")
+        self.pickerWidget.pack(side='top')
+        #picker widget
+        self.picker = Listbox(self.pickF,width=40)
+        self.picker.pack(side = 'left')
+        for i in range(0,len(self.currencies)):
+            self.picker.insert(i,"%s  - to usd rate %f"%(self.currencies[i],self.rates[i]))
+
+    def pickerTranslate(self):
+        print(self.picker.curselection())
+    
+    #right side
+    def displayFrame(self):
+        self.dispFrame = Frame(self.root)
+        self.dispFrame.pack(side = 'right')
+    
+    def display(self):
+        self.dispLable = Label(self.dispFrame,text="The conversion amount:")
+        self.dispLable.pack(side = "top")
+
+        self.disp = Label(self.dispFrame, text = "")
+        self.disp.pack(side = 'bottom')
+    
+    def displayButton(self):
+        self.dispButton = Button(self.dispFrame,command=self.pickerTranslate())
+        self.dispButton.pack(side = "bottom")
+
+def main():
+    convApp().root.mainloop()
+
+main()
